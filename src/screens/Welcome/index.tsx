@@ -6,6 +6,11 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import Lending from "../../assets/icon/lendingIcon.svg"
+import RealEstate from "../../assets/icon/realEstate.svg"
+import ETFs from "../../assets/icon/etfs.svg"
+import Commodities from "../../assets/icon/commodities.svg"
+import Crypto from "../../assets/icon/crypto.svg"
 import { styles } from './style.ts';
 
 const Welcome = ({ navigation }) => {
@@ -22,31 +27,27 @@ const Welcome = ({ navigation }) => {
         <View style={style.input3}>
           <View>
             <Image
-              style={style.input}
-              source={require('../../assets/iconx64.png')}
+                style={style.input}
+                source={require('../../assets/iconx64.png')}
             />
-            <Image
-              style={style.input}
-              source={require('../../assets/iconx64.png')}
-            />
-            <Image
-              style={style.input}
-              source={require('../../assets/iconx64.png')}
-            />
+            <View style={style.input}>
+              <RealEstate/>
+            </View>
+            <View style={style.input}>
+              <ETFs/>
+            </View>
           </View>
-          <View>
-            <Image
-              style={style.input2}
-              source={require('../../assets/iconx64.png')}
-            />
-            <Image
-              style={style.input2}
-              source={require('../../assets/iconx64.png')}
-            />
-            <Image
-              style={style.input2}
-              source={require('../../assets/iconx64.png')}
-            />
+          <View style={style.input2}>
+            <View style={style.input}>
+              <Lending/>
+            </View>
+            <View style={style.input}>
+              <Commodities/>
+            </View>
+            <View style={style.input}>
+              <Crypto/>
+            </View>
+
           </View>
         </View>
         <View style={style.buttonsContainer}>
