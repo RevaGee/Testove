@@ -5,7 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Image,
+  Image, FlatList,
 } from 'react-native';
 import { styles } from './style.ts';
 import CustomHeader from '../Header';
@@ -17,24 +17,14 @@ const SignIn = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ name: '', email: '', password: '' });
   const style = styles();
+
+  const keyboard = [1,2,3,4,5,6,7,8,9,0,"","del"];
+  const pinLenght = 4;
   const validate = () => {
     let valid = true;
     const newErrors = { name: '', email: '', password: '' };
 
-    // Name validation
-    if (!name.trim()) {
-      newErrors.name = 'Name is required';
-      valid = false;
-    }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      newErrors.email = 'Invalid email address';
-      valid = false;
-    }
-
-    // Password validation
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
     if (!passwordRegex.test(password)) {
@@ -48,7 +38,7 @@ const SignIn = ({ navigation }) => {
   };
 
   const handler = () => {
-    navigation.navigate('Main');
+    navigation.navigate('CreatePin');
   };
   const signUpHandler = () => {
     navigation.navigate('SignUp');
@@ -56,13 +46,7 @@ const SignIn = ({ navigation }) => {
 
   return (
     <SafeAreaView style={style.safeArea}>
-      <View style={style.header}>
-        <CustomHeader />
-        {/*<Image*/}
-        {/*  source={require('../../assets/pattern.png')}*/}
-        {/*  style={style.pattern}*/}
-        {/*/>*/}
-      </View>
+      <CustomHeader />
       <View style={style.container}>
         <View style={style.childContainer}>
           <View style={style.icon}>
@@ -83,6 +67,8 @@ const SignIn = ({ navigation }) => {
               value={email}
               onChangeText={setEmail}
               placeholder="Enter your email"
+              returnKeyType="done"
+              keyboardType="default"
               style={style.textInput}
             />
             {errors.email ? (
@@ -97,6 +83,8 @@ const SignIn = ({ navigation }) => {
                 onChangeText={setPassword}
                 placeholder="Enter your password"
                 secureTextEntry={!showPassword}
+                returnKeyType="done"
+                keyboardType="default"
                 style={style.passwordTextIput}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>

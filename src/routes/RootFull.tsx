@@ -9,6 +9,8 @@ import Profile from '../screens/Profile/index.tsx';
 import SignUp from '../screens/SignUp/index.tsx';
 import SignIn from '../screens/SignIn/index.tsx';
 import Welcome from '../screens/Welcome';
+import CreatePin from '../screens/Pin/CreatePin/index.tsx';
+import ConfirmPin from '../screens/Pin/ConfirmPin/index.tsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -59,6 +61,16 @@ function AuthStackNavigator() {
         component={SignIn}
         options={{ headerShown: false }}
       />
+      <AuthStack.Screen
+        name="CreatePin"
+        component={CreatePin}
+        options={{ headerShown: false }}
+      />
+        <AuthStack.Screen
+            name="ConfirmPin"
+            component={ConfirmPin}
+            options={{ headerShown: false }}
+        />
     </AuthStack.Navigator>
   );
 }

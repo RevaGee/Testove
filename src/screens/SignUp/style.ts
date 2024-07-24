@@ -1,9 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styles = () =>
   StyleSheet.create({
     safeArea: {
       padding: 16,
+      backgroundColor: '#F2F3F5',
     },
     header: {
       height: '10%',

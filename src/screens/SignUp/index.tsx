@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import { styles } from './style.ts';
+import CustomHeader from '../Header';
 
 const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -52,12 +53,7 @@ const SignUp = ({ navigation }) => {
 
   return (
     <SafeAreaView style={style.safeArea}>
-      <View style={style.header}>
-        <Image
-          source={require('../../assets/pattern.png')}
-          style={style.pattern}
-        />
-      </View>
+      <CustomHeader />
       <View style={style.container}>
         <View style={style.childContainer}>
           <View style={style.icon}>
@@ -78,6 +74,8 @@ const SignUp = ({ navigation }) => {
               value={name}
               onChangeText={setName}
               placeholder="Enter your name"
+              returnKeyType="done"
+              keyboardType="default"
               style={style.textInput}
             />
             {errors.name ? (
@@ -91,6 +89,8 @@ const SignUp = ({ navigation }) => {
               value={email}
               onChangeText={setEmail}
               placeholder="Enter your email"
+              returnKeyType="done"
+              keyboardType="default"
               style={style.textInput}
             />
             {errors.email ? (
@@ -105,6 +105,8 @@ const SignUp = ({ navigation }) => {
                 onChangeText={setPassword}
                 placeholder="Enter your password"
                 secureTextEntry={!showPassword}
+                returnKeyType="done"
+                keyboardType="default"
                 style={style.passwordTextIput}
               />
               <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>

@@ -3,14 +3,18 @@ import { StyleSheet } from 'react-native';
 export const styles = () =>
   StyleSheet.create({
     header: {
-      flexDirection: 'row',
+      height: '10%',
+      justifyContent: 'center',
       alignItems: 'center',
-      padding: 16,
-      backgroundColor: 'white',
-      elevation: 4,
     },
     backButton: {
       marginRight: 16,
+      position: 'absolute',
+      left: 20,
+      zIndex: 1,
+    },
+    pattern: {
+      marginTop: '80%',
     },
     title: {
       fontSize: 18,
