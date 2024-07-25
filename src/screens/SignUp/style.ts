@@ -6,11 +6,6 @@ export const styles = () =>
       padding: 16,
       backgroundColor: '#F2F3F5',
     },
-    header: {
-      height: '10%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
     container: {
       height: '100%',
       backgroundColor: '#fff',
@@ -40,11 +35,15 @@ export const styles = () =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 20,
+    iconStyle: {
+      width: 25,
+      height: 25,
     },
+    // title: {
+    //   fontSize: 18,
+    //   fontWeight: 'bold',
+    //   marginBottom: 20,
+    // },
     inputContainer: {
       marginTop: 20,
     },
@@ -75,31 +74,12 @@ export const styles = () =>
       color: 'red',
       marginTop: 5,
     },
-    submitButton: {
-      backgroundColor: '#007BFF',
-      borderRadius: 8,
-      padding: 15,
-      alignItems: 'center',
-    },
-    submitButtonText: {
-      color: '#fff',
-      fontSize: 16,
-    },
     button: {
       backgroundColor: '#FA8A34',
       paddingVertical: 15,
       paddingHorizontal: 30,
       borderRadius: 16,
       width: '95%',
-      alignSelf: 'center',
-    },
-    buttonSpacing: {
-      marginTop: 20,
-    },
-    signIn: {
-      fontWeight: '600',
-      color: '#FA8A34',
-      fontSize: 15,
       alignSelf: 'center',
     },
     signUp: {
@@ -119,12 +99,5 @@ export const styles = () =>
     },
     textContainer: {
       marginLeft: 10,
-    },
-    pattern: {
-      marginTop: '87%',
-    },
-    iconStyle: {
-      width: 25,
-      height: 25,
     },
   });

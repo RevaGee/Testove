@@ -1,14 +1,9 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styles = () =>
   StyleSheet.create({
     safeArea: {
       padding: 16,
-    },
-    header: {
-      height: '10%',
-      justifyContent: 'center',
-      alignItems: 'center',
     },
     container: {
       height: '100%',
@@ -40,14 +35,15 @@ export const styles = () =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    title: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      marginBottom: 20,
+    iconStyle: {
+      width: 25,
+      height: 25,
     },
-    inputContainer: {
-      marginTop: 20,
-    },
+    // title: {
+    //   fontSize: 18,
+    //   fontWeight: 'bold',
+    //   marginBottom: 20,
+    // },
     textInput: {
       borderWidth: 1,
       borderColor: '#ccc',
@@ -75,16 +71,6 @@ export const styles = () =>
       color: 'red',
       marginTop: 5,
     },
-    submitButton: {
-      backgroundColor: '#007BFF',
-      borderRadius: 8,
-      padding: 15,
-      alignItems: 'center',
-    },
-    submitButtonText: {
-      color: '#fff',
-      fontSize: 16,
-    },
     button: {
       backgroundColor: '#FA8A34',
       paddingVertical: 15,
@@ -93,7 +79,7 @@ export const styles = () =>
       width: '95%',
       alignSelf: 'center',
     },
-    buttonSpacing: {
+    space: {
       marginTop: 20,
     },
     signIn: {
@@ -119,12 +105,5 @@ export const styles = () =>
     },
     textContainer: {
       marginLeft: 10,
-    },
-    pattern: {
-      marginTop: '87%',
-    },
-    iconStyle: {
-      width: 25,
-      height: 25,
     },
   });
