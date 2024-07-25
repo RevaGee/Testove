@@ -5,25 +5,22 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Image, FlatList,
+  Image,
 } from 'react-native';
 import { styles } from './style.ts';
 import CustomHeader from '../Header';
+import { login } from '../../services/api/auth.ts';
 
 const SignIn = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ name: '', email: '', password: '' });
   const style = styles();
 
-  const keyboard = [1,2,3,4,5,6,7,8,9,0,"","del"];
-  const pinLenght = 4;
   const validate = () => {
     let valid = true;
     const newErrors = { name: '', email: '', password: '' };
-
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
@@ -37,8 +34,22 @@ const SignIn = ({ navigation }) => {
     return valid;
   };
 
-  const handler = () => {
-    navigation.navigate('CreatePin');
+  const handleLogin = async () => {
+    try {
+      const loginResponse = await login('emilys', 'emilyspass');
+      console.log(loginResponse);
+
+      if (
+        email === loginResponse.email &&
+        password === 'emilyspass'
+      ) {
+        navigation.navigate('CreatePin');
+      } else {
+        setErrors({ ...errors, email: 'Invalid email or password' });
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
   const signUpHandler = () => {
     navigation.navigate('SignUp');
@@ -61,7 +72,7 @@ const SignIn = ({ navigation }) => {
           </View>
         </View>
         <View style={style.textInputContainer}>
-          <View style={style.inputContainer}>
+          <View style={style.space}>
             <Text style={style.textStyle}>E-mail</Text>
             <TextInput
               value={email}
@@ -75,7 +86,7 @@ const SignIn = ({ navigation }) => {
               <Text style={style.errorText}>{errors.email}</Text>
             ) : null}
           </View>
-          <View style={style.inputContainer}>
+          <View style={style.space}>
             <Text style={style.textStyle}>Password</Text>
             <View style={style.passwordContainer}>
               <TextInput
@@ -103,11 +114,11 @@ const SignIn = ({ navigation }) => {
             ) : null}
           </View>
           <View style={style.buttonsContainer}>
-            <TouchableOpacity style={style.button} onPress={handler}>
+            <TouchableOpacity style={style.button} onPress={handleLogin}>
               <Text style={style.signUp}>Continue</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={signUpHandler}>
-              <Text style={[style.signIn, style.buttonSpacing]}>
+              <Text style={[style.signIn, style.space]}>
                 Create Account
               </Text>
             </TouchableOpacity>

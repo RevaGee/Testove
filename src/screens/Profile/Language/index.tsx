@@ -1,12 +1,14 @@
 import React from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './style.ts';
-import Arrow from '../../assets/icon/Vector.svg';
+import Arrow from '../../../assets/icon/Vector.svg';
 
-const Profile = ({ navigation }) => {
+const Language = ({ navigation }) => {
   const style = styles();
   const handler = () => {
-    navigation.navigate('Language');
+    navigation.navigate('Profile', {
+      screen: 'Language',
+    });
   };
 
   return (
@@ -21,20 +23,12 @@ const Profile = ({ navigation }) => {
       <View style={style.container}>
         <Text style={style.settings}>Settings</Text>
         <View style={style.textInputContainer}>
-          <View style={style.childContainer}>
-            <View style={style.icon} />
-            <Text style={style.textContainer}>John doe</Text>
-          </View>
           <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Basic</Text>
             <TouchableOpacity onPress={handler}>
-              <Text style={style.childContainer}>Language</Text>
+              <Text style={style.childContainer}>English</Text>
             </TouchableOpacity>
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Other</Text>
             <TouchableOpacity>
-              <Text style={style.childContainer}>Log Out</Text>
+              <Text style={style.childContainer}>Arabic</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -43,4 +37,4 @@ const Profile = ({ navigation }) => {
   );
 };
 
-export default Profile;
+export default Language;
