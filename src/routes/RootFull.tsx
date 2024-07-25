@@ -11,37 +11,44 @@ import SignIn from '../screens/SignIn/index.tsx';
 import Welcome from '../screens/Welcome';
 import CreatePin from '../screens/Pin/CreatePin/index.tsx';
 import ConfirmPin from '../screens/Pin/ConfirmPin/index.tsx';
+import Language from '../screens/Profile/Language/index.tsx';
+import HomeIcon from '../assets/icon/home.svg'
+import PortfolioIcon from '../assets/icon/portfolio.svg'
+import SearchIcon from '../assets/icon/search.svg'
+import ProfileIcon from '../assets/icon/profile.svg'
+
+
 
 const Tab = createBottomTabNavigator();
+const AuthStack = createStackNavigator();
+const MainStack = createStackNavigator();
 
 function MainTabs() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Dashboard"
+        name="Home"
         component={Dashboard}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarIcon: () => (<HomeIcon/>)}}
       />
       <Tab.Screen
         name="Portfolio"
         component={Portfolio}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarIcon: () => (<PortfolioIcon/>)}}
       />
       <Tab.Screen
         name="Search"
         component={Search}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarIcon: () => (<SearchIcon/>)}}
       />
       <Tab.Screen
         name="Profile"
         component={Profile}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, tabBarIcon: () => (<ProfileIcon/>)}}
       />
     </Tab.Navigator>
   );
 }
-
-const AuthStack = createStackNavigator();
 
 function AuthStackNavigator() {
   return (
@@ -66,21 +73,20 @@ function AuthStackNavigator() {
         component={CreatePin}
         options={{ headerShown: false }}
       />
-        <AuthStack.Screen
-            name="ConfirmPin"
-            component={ConfirmPin}
-            options={{ headerShown: false }}
-        />
+      <AuthStack.Screen
+        name="ConfirmPin"
+        component={ConfirmPin}
+        options={{ headerShown: false }}
+      />
     </AuthStack.Navigator>
   );
 }
 
-const MainStack = createStackNavigator();
-
 export default function Navigation() {
   return (
     <NavigationContainer>
-      <MainStack.Navigator screenOptions={{ headerShown: false }}>
+      <MainStack.Navigator
+        screenOptions={{ headerShown: false, gestureEnabled: false }}>
         <MainStack.Screen name="Auth" component={AuthStackNavigator} />
         <MainStack.Screen name="Main" component={MainTabs} />
       </MainStack.Navigator>

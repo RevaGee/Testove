@@ -3,18 +3,14 @@ import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './style.ts';
 import { login } from '../../services/api/auth.ts';
 import { posts } from '../../services/api/post.ts';
+import {Post} from "../../types/types.ts";
 
-interface Post {
-  id: number;
-  title: string;
-  body: string;
-}
 
 const Dashboard = () => {
-  const style = styles();
   const [name, setName] = useState<string>('');
   const [lastName, setLastname] = useState<string>('');
-  const [postData, setPostData] = useState([]);
+  const [postData, setPostData] = useState<Post[]>([]);
+  const style = styles();
 
   useEffect(() => {
     getInfo();
@@ -31,7 +27,6 @@ const Dashboard = () => {
   const getPosts = async () => {
     try {
       const postResponse = await posts();
-      console.log(postResponse);
       setPostData(postResponse);
     } catch (error) {}
   };
@@ -42,6 +37,7 @@ const Dashboard = () => {
       <Text style={style.childPostText}>{item.body}</Text>
     </View>
   );
+
   return (
     <>
       <View style={style.header}>

@@ -41,7 +41,7 @@ const SignIn = ({ navigation }) => {
 
       if (
         email === loginResponse.email &&
-        password === 'emilyspass'
+        password === '101302835'
       ) {
         navigation.navigate('CreatePin');
       } else {

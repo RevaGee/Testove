@@ -13,18 +13,18 @@ export const styles = () =>
       height: '100%',
       backgroundColor: '#F2F3F5',
     },
-      postContainer:{
-          backgroundColor: '#fff',
-          padding: 16,
-          borderRadius: 16,
-          marginTop: 15,
-      },
-      textPost:{
-          fontSize: 15,
-          fontWeight: 400,
-          color: '#606773',
-          marginTop: 10,
-      },
+    postContainer: {
+      backgroundColor: '#fff',
+      padding: 16,
+      borderRadius: 16,
+      marginTop: 15,
+    },
+    textPost: {
+      fontSize: 15,
+      fontWeight: 400,
+      color: '#606773',
+      marginTop: 10,
+    },
     childContainer: {
       alignItems: 'center',
       flexDirection: 'row',
@@ -59,12 +59,12 @@ export const styles = () =>
       color: '#fff',
       paddingBottom: 5,
     },
-      childPostText:{
-          fontWeight: 400,
-          fontSize: 13,
-          color: '#606773',
-          paddingBottom: 5,
-      },
+    childPostText: {
+      fontWeight: 400,
+      fontSize: 13,
+      color: '#606773',
+      paddingBottom: 5,
+    },
     headerText: {
       fontSize: 18,
       fontWeight: 'bold',
