@@ -22,6 +22,7 @@ const ConfirmPin = ({ navigation, route }) => {
   const { pin } = route.params;
   const rnBiometric = new ReactNativeBiometrics();
   const { dispatch } = useContext(AppContext);
+
   const validateConfirmPin = (): boolean => {
     if (confirmPin.length === pinLength && confirmPin === pin) {
       return true;
@@ -40,13 +41,14 @@ const ConfirmPin = ({ navigation, route }) => {
 
       if (success) {
         dispatch({ type: 'CONFIRM_PIN', pinCode: confirmPin });
-        navigation.navigate('Welcome');
       }
     } catch (error) {
       console.log(error);
     } finally {
-      dispatch({ type: 'CONFIRM_PIN',pinCode: confirmPin });
-      navigation.navigate('Welcome');
+      dispatch({
+        type: 'CONFIRM_PIN',
+        pinCode: confirmPin,
+      });
     }
   };
   const handleSubmit = () => {

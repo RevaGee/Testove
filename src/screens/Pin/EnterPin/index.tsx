@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   FlatList, Image,
   SafeAreaView,
@@ -8,17 +8,12 @@ import {
 } from 'react-native';
 import { styles } from './style';
 import DeleteIcon from '../../../assets/icon/Union.svg';
-import Mobile from '../../../assets/icon/mobile.svg';
 import AppContext from '../../auth/AuthContext.tsx';
-import { Apilogin } from '../../../services/api/auth.ts';
 
 const ConfirmPin = ({ navigation }) => {
   const { state } = useContext(AppContext);
   const { dispatch } = useContext(AppContext);
   const [confirmPin, setConfirmPin] = useState<string>('');
-  const [name, setName] = useState<string>(state.name);
-  const [lastName, setLastname] = useState<string>(state.lastName);
-  const [image, setImage] = useState<string>(state.image);
   const [error, setError] = useState<string>('');
   const style = styles();
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
@@ -57,10 +52,10 @@ const ConfirmPin = ({ navigation }) => {
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.header}>
-          <Image source={{ uri: image }} style={style.icon} />
+          <Image source={{ uri: state.image }} style={style.icon} />
       </View>
       <View style={style.container}>
-        <Text style={style.title}>{`${name} ${lastName}`}</Text>
+        <Text style={style.title}>{`${state.name} ${state.lastName}`}</Text>
         <TouchableOpacity onPress={handleChangeAccount}>
           <Text style={style.title}>Change Account</Text>
         </TouchableOpacity>

@@ -109,15 +109,17 @@ function Navigation() {
   return (
     <NavigationContainer>
       <RootStack.Navigator screenOptions={{ headerShown: false }}>
-        {state.isLoggedIn && state.pinConfirmed ? (
+        {state.isLoggedIn && state.pinCode ? (
           <>
-              <RootStack.Screen name="EnterPin" component={EnterPin} />
+            <RootStack.Screen name="EnterPin" component={EnterPin} />
+
             <RootStack.Screen name="MainTabs" component={MainTabsNavigator} />
-            <RootStack.Screen name="Language" component={Language} />
           </>
         ) : (
           <RootStack.Screen name="AuthStack" component={AuthStackNavigator} />
         )}
+
+        <RootStack.Screen name="Language" component={Language} />
       </RootStack.Navigator>
     </NavigationContainer>
   );
