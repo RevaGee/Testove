@@ -14,9 +14,9 @@ export const styles = () =>
         },
         settings: {
             color: '#06070A',
-            fontWeight: 600,
             fontSize: 22,
             marginLeft: 16,
+            fontWeight: 'bold',
         },
         backButton: {
             marginRight: 16,
@@ -28,7 +28,22 @@ export const styles = () =>
             height: '100%',
             backgroundColor: '#fff',
         },
+        headerContainer: {
+            alignItems: 'center',
+            flexDirection: 'row',
+            paddingBottom: 15,
+            padding: 16,
+            borderWidth: 1,
+            borderColor: '#ccc',
+            borderRadius: 16,
+            marginTop: 10,
+        },
         childContainer: {
+            alignItems: 'center',
+            flexDirection: 'row',
+        },
+        space:{
+            justifyContent:'space-between',
             alignItems: 'center',
             flexDirection: 'row',
             paddingBottom: 15,
