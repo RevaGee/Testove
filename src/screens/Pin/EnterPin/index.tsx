@@ -10,45 +10,31 @@ import { styles } from './style';
 import DeleteIcon from '../../../assets/icon/Union.svg';
 import Arrow from '../../../assets/icon/Vector.svg';
 import Mobile from '../../../assets/icon/mobile.svg';
-import ReactNativeBiometrics from 'react-native-biometrics';
 import AppContext from '../../auth/AuthContext.tsx';
 
-const ConfirmPin = ({ navigation, route }) => {
+const ConfirmPin = ({ navigation }) => {
   const [confirmPin, setConfirmPin] = useState<string>('');
   const [error, setError] = useState<string>('');
   const style = styles();
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
   const pinLength = 5;
-  const { pin } = route.params;
-  const rnBiometric = new ReactNativeBiometrics();
-  const { dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
+
   const validateConfirmPin = (): boolean => {
-    if (confirmPin.length === pinLength && confirmPin === pin) {
+    if (confirmPin.length === pinLength && confirmPin === state.pinCode) {
       return true;
     } else {
       setError('Pins do not match');
       return false;
     }
   };
+  console.log('confirmPin', confirmPin);
+  console.log('state.pinCode', state.pinCode);
 
   const authenticateWithBiometrics = async () => {
-    try {
-      const promptResult = await rnBiometric.simplePrompt({
-        promptMessage: 'Confirm your identity',
-      });
-      const { success } = promptResult;
-
-      if (success) {
-        dispatch({ type: 'CONFIRM_PIN' });
-        navigation.navigate('Welcome');
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      dispatch({ type: 'CONFIRM_PIN' });
-      navigation.navigate('Welcome');
-    }
+    navigation.navigate('Main');
   };
+
   const handleSubmit = () => {
     if (validateConfirmPin()) {
       authenticateWithBiometrics();
@@ -76,8 +62,8 @@ const ConfirmPin = ({ navigation, route }) => {
         </View>
       </View>
       <View style={style.container}>
-        <Text style={style.title}>Repeat your Pin code</Text>
-        <Text style={style.childText}>enter the same 5 digit code:</Text>
+        <Text style={style.title}>Change code</Text>
+        <Text style={style.childText}>enter 5 digit code:</Text>
         <View style={style.pinContainer}>
           {Array(pinLength)
             .fill('')

@@ -21,7 +21,7 @@ interface RefreshResponse {
   token: string;
 }
 
-export const login = async (
+export const Apilogin = async (
   username: string,
   password: string,
 ): Promise<LoginResponse> => {

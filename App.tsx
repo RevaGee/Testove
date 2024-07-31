@@ -5,20 +5,23 @@
  * @format
  */
 
-import React from 'react';
-import { useColorScheme, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
 
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Navigation from './src/routes/RootFull.tsx';
-import {SafeAreaProvider} from "react-native-safe-area-context";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppProvider } from './src/screens/auth/AuthContext.tsx';
+import SplashScreen from 'react-native-splash-screen';
 
 function App(): React.JSX.Element {
 
   return (
     <SafeAreaProvider>
-      <View style={{ backgroundColor: '#F2F3F5', flex: 1 }}>
-        <Navigation />
-      </View>
+      <AppProvider>
+        <View style={{ backgroundColor: '#F2F3F5', flex: 1 }}>
+          <Navigation />
+        </View>
+      </AppProvider>
     </SafeAreaProvider>
   );
 }

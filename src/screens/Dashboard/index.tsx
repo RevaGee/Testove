@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { styles } from './style.ts';
-import { login } from '../../services/api/auth.ts';
+import {Apilogin, login} from '../../services/api/auth.ts';
 import { posts } from '../../services/api/post.ts';
 import { Post } from '../../types/types.ts';
 import ListHeaderComponent from './listHeaderComponent.tsx';
@@ -18,7 +18,7 @@ const Dashboard = () => {
   }, []);
   const getInfo = async () => {
     try {
-      const loginResponse = await login('emilys', 'emilyspass');
+      const loginResponse = await Apilogin('emilys', 'emilyspass');
       setName(loginResponse.firstName);
       setLastname(loginResponse.lastName);
     } catch (error) {}

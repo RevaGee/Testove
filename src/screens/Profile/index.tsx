@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './style.ts';
 import Arrow from '../../assets/icon/Vector.svg';
+import AppContext from "../auth/AuthContext.tsx";
 
 const Profile = ({ navigation }) => {
+  const { dispatch } = useContext(AppContext);
   const style = styles();
+
   const handler = () => {
     navigation.navigate('Language');
   };
 
+  const handleLogout = async () => {
+    dispatch({ type: 'LOGOUT' });
+  };
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.header}>
@@ -33,7 +39,7 @@ const Profile = ({ navigation }) => {
           </View>
           <View style={style.inputContainer}>
             <Text style={style.textStyle}>Other</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleLogout}>
               <Text style={style.childContainer}>Log Out</Text>
             </TouchableOpacity>
           </View>

@@ -13,6 +13,22 @@ export const styles = () =>
       backgroundColor: '#F2F3F5',
       padding: 16,
     },
+    testContainer: {
+      backgroundColor: '#fff',
+      borderRadius: 16,
+      padding: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      alignSelf: 'center',
+      width: 340,
+      height: 144,
+    },
+    testTextContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
     startContainer: {
       width: 250,
       height: 150,
@@ -55,6 +71,11 @@ export const styles = () =>
       flexShrink: 1,
       margin: 8,
     },
+    testHeaderText: {
+      color: '#06070A',
+      fontSize: 15,
+      fontWeight: 500,
+    },
     arrowIcon: {
       top: 5,
     },
@@ -88,7 +109,6 @@ export const styles = () =>
       color: '#fff',
       paddingBottom: 5,
     },
-
     headerText: {
       fontSize: 18,
       fontWeight: 'bold',
@@ -105,5 +125,15 @@ export const styles = () =>
       padding: 16,
       marginBottom: -30,
       top: -15,
+    },
+    taskText: {
+      fontSize: 15,
+      fontWeight: 500,
+      color: '#009E81',
+      paddingTop: 40,
+    },
+    dropDownIcon: {
+      top: 20,
+      marginLeft: 40,
     },
   });

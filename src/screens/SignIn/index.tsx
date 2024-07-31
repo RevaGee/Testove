@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,20 +7,28 @@ import {
   View,
   Image,
 } from 'react-native';
-import { styles } from './style.ts';
+import { styles } from './style';
 import CustomHeader from '../Header';
-import { login } from '../../services/api/auth.ts';
+import { Apilogin } from '../../services/api/auth';
+import AppContext from '../auth/AuthContext.tsx';
 
 const SignIn = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { state, dispatch } = useContext(AppContext);
+
+  const [email, setEmail] = useState<string>(state.email);
+  const [password, setPassword] = useState<string>(state.password);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({ name: '', email: '', password: '' });
+  const [errors, setErrors] = useState({ email: '', password: '' });
   const style = styles();
+
+  useEffect(() => {
+    setEmail(state.email);
+    setPassword(state.password);
+  }, [state]);
 
   const validate = () => {
     let valid = true;
-    const newErrors = { name: '', email: '', password: '' };
+    const newErrors = { email: '', password: '' };
 
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
@@ -35,22 +43,41 @@ const SignIn = ({ navigation }) => {
   };
 
   const handleLogin = async () => {
-    try {
-      const loginResponse = await login('emilys', 'emilyspass');
-      console.log(loginResponse);
+    console.log('Handle login called');
+    // if (!validate()) return;
 
-      if (
-        email === loginResponse.email &&
-        password === '101302835'
-      ) {
+    try {
+      const loginResponse = await Apilogin('emilys', 'emilyspass');
+      console.log('Login response:', loginResponse); // Додайте цей рядок
+
+      if (email === loginResponse.email && password === '101302835') {
+        dispatch({ type: 'LOGIN', token: 'your_token', email, password });
         navigation.navigate('CreatePin');
       } else {
-        setErrors({ ...errors, email: 'Invalid email or password' });
+        setErrors({ ...errors, email: 'Error: Invalid E-mail or Password' });
       }
     } catch (error) {
       console.error('Login failed:', error);
     }
   };
+  // const handleLogin = async () => {
+  //   try {
+  //     const loginResponse = await Apilogin('emilys', 'emilyspass');
+  //     console.log(loginResponse);
+  //
+  //     if (
+  //         email === loginResponse.email &&
+  //         password === '101302835'
+  //     ) {
+  //       navigation.navigate('CreatePin');
+  //     } else {
+  //       setErrors({ ...errors, email: 'Invalid email or password' });
+  //     }
+  //   } catch (error) {
+  //     console.error('Login failed:', error);
+  //   }
+  // };
+
   const signUpHandler = () => {
     navigation.navigate('SignUp');
   };
@@ -72,6 +99,9 @@ const SignIn = ({ navigation }) => {
           </View>
         </View>
         <View style={style.textInputContainer}>
+          {errors.email || errors.password ? (
+            <Text style={style.errorText}>{errors.email}</Text>
+          ) : null}
           <View style={style.space}>
             <Text style={style.textStyle}>E-mail</Text>
             <TextInput
@@ -82,9 +112,6 @@ const SignIn = ({ navigation }) => {
               keyboardType="default"
               style={style.textInput}
             />
-            {errors.email ? (
-              <Text style={style.errorText}>{errors.email}</Text>
-            ) : null}
           </View>
           <View style={style.space}>
             <Text style={style.textStyle}>Password</Text>
@@ -109,18 +136,13 @@ const SignIn = ({ navigation }) => {
                 />
               </TouchableOpacity>
             </View>
-            {errors.password ? (
-              <Text style={style.errorText}>{errors.password}</Text>
-            ) : null}
           </View>
           <View style={style.buttonsContainer}>
             <TouchableOpacity style={style.button} onPress={handleLogin}>
               <Text style={style.signUp}>Continue</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={signUpHandler}>
-              <Text style={[style.signIn, style.space]}>
-                Create Account
-              </Text>
+              <Text style={[style.signIn, style.space]}>Create Account</Text>
             </TouchableOpacity>
           </View>
         </View>
