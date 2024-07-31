@@ -8,13 +8,17 @@ interface State {
   password: string;
   pinConfirmed: boolean;
   pinCode: string;
+  name: string;
+  lastName: string;
+  image: string;
 }
 
 type Action =
   | { type: 'INIT'; payload: State }
   | { type: 'LOGIN'; token: string; email: string; password: string }
   | { type: 'LOGOUT' }
-  | { type: 'CONFIRM_PIN'; pinCode: string };
+  | { type: 'CONFIRM_PIN'; pinCode: string }
+  | { type: 'SET_USER_DATA'; name: string; lastName: string; image: string };
 
 const initialState: State = {
   isLoggedIn: false,
@@ -23,6 +27,9 @@ const initialState: State = {
   password: '',
   pinConfirmed: false,
   pinCode: '',
+  name: '',
+  lastName: '',
+  image: '',
 };
 
 function reducer(state: State, action: Action): State {
@@ -56,6 +63,13 @@ function reducer(state: State, action: Action): State {
         pinConfirmed: true,
         pinCode: action.pinCode,
       };
+    case 'SET_USER_DATA':
+      return {
+        ...state,
+        name: action.name,
+        lastName: action.lastName,
+        image: action.image,
+      };
     default:
       return state;
   }
@@ -77,8 +91,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const loadState = async () => {
       const storedState = await AsyncStorage.getItem('appState');
+      const userData = await AsyncStorage.getItem('userData');
+
       if (storedState) {
-        dispatch({ type: 'INIT', payload: JSON.parse(storedState) });
+        const parsedState = JSON.parse(storedState);
+        dispatch({
+          type: 'INIT',
+          payload: {
+            ...parsedState,
+            ...(userData ? JSON.parse(userData) : {}),
+          },
+        });
       }
     };
 

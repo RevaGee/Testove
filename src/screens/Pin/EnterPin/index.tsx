@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
-  FlatList,
+  FlatList, Image,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -8,17 +8,21 @@ import {
 } from 'react-native';
 import { styles } from './style';
 import DeleteIcon from '../../../assets/icon/Union.svg';
-import Arrow from '../../../assets/icon/Vector.svg';
 import Mobile from '../../../assets/icon/mobile.svg';
 import AppContext from '../../auth/AuthContext.tsx';
+import { Apilogin } from '../../../services/api/auth.ts';
 
 const ConfirmPin = ({ navigation }) => {
+  const { state } = useContext(AppContext);
+  const { dispatch } = useContext(AppContext);
   const [confirmPin, setConfirmPin] = useState<string>('');
+  const [name, setName] = useState<string>(state.name);
+  const [lastName, setLastname] = useState<string>(state.lastName);
+  const [image, setImage] = useState<string>(state.image);
   const [error, setError] = useState<string>('');
   const style = styles();
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
   const pinLength = 5;
-  const { state } = useContext(AppContext);
 
   const validateConfirmPin = (): boolean => {
     if (confirmPin.length === pinLength && confirmPin === state.pinCode) {
@@ -28,17 +32,18 @@ const ConfirmPin = ({ navigation }) => {
       return false;
     }
   };
-  console.log('confirmPin', confirmPin);
-  console.log('state.pinCode', state.pinCode);
 
   const authenticateWithBiometrics = async () => {
-    navigation.navigate('Main');
+    navigation.navigate('MainTabs');
   };
 
   const handleSubmit = () => {
     if (validateConfirmPin()) {
       authenticateWithBiometrics();
     }
+  };
+  const handleChangeAccount = () => {
+    dispatch({ type: 'LOGOUT' });
   };
 
   const handlePress = (item: number | string) => {
@@ -52,17 +57,13 @@ const ConfirmPin = ({ navigation }) => {
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={style.backButton}>
-          <Arrow />
-        </TouchableOpacity>
-        <View style={style.icon}>
-          <Mobile />
-        </View>
+          <Image source={{ uri: image }} style={style.icon} />
       </View>
       <View style={style.container}>
-        <Text style={style.title}>Change code</Text>
+        <Text style={style.title}>{`${name} ${lastName}`}</Text>
+        <TouchableOpacity onPress={handleChangeAccount}>
+          <Text style={style.title}>Change Account</Text>
+        </TouchableOpacity>
         <Text style={style.childText}>enter 5 digit code:</Text>
         <View style={style.pinContainer}>
           {Array(pinLength)

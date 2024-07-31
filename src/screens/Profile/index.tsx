@@ -1,20 +1,29 @@
-import React, {useContext} from 'react';
-import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useContext } from 'react';
+import {
+  Image,
+  SafeAreaView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { styles } from './style.ts';
 import Arrow from '../../assets/icon/Vector.svg';
-import AppContext from "../auth/AuthContext.tsx";
+import AppContext from '../auth/AuthContext.tsx';
 
 const Profile = ({ navigation }) => {
   const { dispatch } = useContext(AppContext);
+  const { state } = useContext(AppContext);
   const style = styles();
+
 
   const handler = () => {
     navigation.navigate('Language');
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     dispatch({ type: 'LOGOUT' });
   };
+
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.header}>
@@ -28,8 +37,10 @@ const Profile = ({ navigation }) => {
         <Text style={style.settings}>Settings</Text>
         <View style={style.textInputContainer}>
           <View style={style.childContainer}>
-            <View style={style.icon} />
-            <Text style={style.textContainer}>John doe</Text>
+            <View style={style.icon}>
+              <Image source={{ uri: state.image }} style={style.image} />
+            </View>
+            <Text style={style.textContainer}>{`${state.name} ${state.lastName}`}</Text>
           </View>
           <View style={style.inputContainer}>
             <Text style={style.textStyle}>Basic</Text>

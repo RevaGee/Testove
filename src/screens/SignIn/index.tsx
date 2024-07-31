@@ -11,6 +11,7 @@ import { styles } from './style';
 import CustomHeader from '../Header';
 import { Apilogin } from '../../services/api/auth';
 import AppContext from '../auth/AuthContext.tsx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = ({ navigation }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -43,12 +44,17 @@ const SignIn = ({ navigation }) => {
   };
 
   const handleLogin = async () => {
-    console.log('Handle login called');
-    // if (!validate()) return;
-
     try {
       const loginResponse = await Apilogin('emilys', 'emilyspass');
-      console.log('Login response:', loginResponse); // Додайте цей рядок
+
+      await AsyncStorage.setItem(
+        'userData',
+        JSON.stringify({
+          name: loginResponse.firstName,
+          lastName: loginResponse.lastName,
+          image: loginResponse.image,
+        }),
+      );
 
       if (email === loginResponse.email && password === '101302835') {
         dispatch({ type: 'LOGIN', token: 'your_token', email, password });
@@ -60,23 +66,6 @@ const SignIn = ({ navigation }) => {
       console.error('Login failed:', error);
     }
   };
-  // const handleLogin = async () => {
-  //   try {
-  //     const loginResponse = await Apilogin('emilys', 'emilyspass');
-  //     console.log(loginResponse);
-  //
-  //     if (
-  //         email === loginResponse.email &&
-  //         password === '101302835'
-  //     ) {
-  //       navigation.navigate('CreatePin');
-  //     } else {
-  //       setErrors({ ...errors, email: 'Invalid email or password' });
-  //     }
-  //   } catch (error) {
-  //     console.error('Login failed:', error);
-  //   }
-  // };
 
   const signUpHandler = () => {
     navigation.navigate('SignUp');

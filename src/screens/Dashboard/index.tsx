@@ -1,28 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { styles } from './style.ts';
-import {Apilogin, login} from '../../services/api/auth.ts';
+import {Apilogin} from '../../services/api/auth.ts';
 import { posts } from '../../services/api/post.ts';
 import { Post } from '../../types/types.ts';
 import ListHeaderComponent from './listHeaderComponent.tsx';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppContext from "../auth/AuthContext.tsx";
 
 const Dashboard = () => {
-  const [name, setName] = useState<string>('');
-  const [lastName, setLastname] = useState<string>('');
   const [postData, setPostData] = useState<Post[]>([]);
+  const { state } = useContext(AppContext);
   const style = styles();
 
   useEffect(() => {
-    getInfo();
     getPosts();
   }, []);
-  const getInfo = async () => {
-    try {
-      const loginResponse = await Apilogin('emilys', 'emilyspass');
-      setName(loginResponse.firstName);
-      setLastname(loginResponse.lastName);
-    } catch (error) {}
-  };
 
   const getPosts = async () => {
     try {
@@ -48,7 +41,7 @@ const Dashboard = () => {
     <>
       <View style={style.header}>
         <Text style={style.childText}>Your name</Text>
-        <Text style={style.title}>{`${name} ${lastName}`}</Text>
+        <Text style={style.title}>{`${state.name} ${state.lastName}`}</Text>
       </View>
         <FlatList
           ListHeaderComponent={ListHeaderComponent}

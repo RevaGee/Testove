@@ -39,13 +39,13 @@ const ConfirmPin = ({ navigation, route }) => {
       const { success } = promptResult;
 
       if (success) {
-        dispatch({ type: 'CONFIRM_PIN' });
+        dispatch({ type: 'CONFIRM_PIN', pinCode: confirmPin });
         navigation.navigate('Welcome');
       }
     } catch (error) {
       console.log(error);
     } finally {
-      dispatch({ type: 'CONFIRM_PIN' });
+      dispatch({ type: 'CONFIRM_PIN',pinCode: confirmPin });
       navigation.navigate('Welcome');
     }
   };

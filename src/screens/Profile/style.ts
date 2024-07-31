@@ -57,6 +57,11 @@ export const styles = () =>
             justifyContent: 'center',
             alignItems: 'center',
         },
+        image: {
+            width: 32,
+            height: 32,
+            borderRadius: 50,
+        },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
