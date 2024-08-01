@@ -71,7 +71,7 @@ const SignUp = () => {
               <TextInput
                   value={name}
                   onChangeText={setName}
-                  placeholder="Enter your name"
+                  placeholder={t('EnterYourName')}
                   returnKeyType="done"
                   keyboardType="default"
                   style={style.textInput}
@@ -86,7 +86,7 @@ const SignUp = () => {
               <TextInput
                   value={email}
                   onChangeText={setEmail}
-                  placeholder="Enter your email"
+                  placeholder={t('EnterYourEmail')}
                   returnKeyType="done"
                   keyboardType="default"
                   style={style.textInput}

@@ -27,7 +27,7 @@ export const styles = () => {
     pinContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      width: '80%',
+      width: '60%',
       marginBottom: 20,
     },
     pinDot: {
@@ -62,7 +62,7 @@ export const styles = () => {
     },
     errorText: {
       color: 'red',
-      marginBottom: 20,
+      top: 50,
     },
     list:{
       marginTop:'40%',

@@ -12,6 +12,7 @@ import Arrow from '../../../assets/icon/Vector.svg';
 import Mobile from '../../../assets/icon/mobile.svg';
 import ReactNativeBiometrics from 'react-native-biometrics';
 import AppContext from '../../auth/AuthContext.tsx';
+import { useTranslation } from 'react-i18next';
 
 const ConfirmPin = ({ navigation, route }) => {
   const [confirmPin, setConfirmPin] = useState<string>('');
@@ -20,6 +21,7 @@ const ConfirmPin = ({ navigation, route }) => {
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
   const pinLength = 5;
   const { pin } = route.params;
+  const { t } = useTranslation();
   const rnBiometric = new ReactNativeBiometrics();
   const { dispatch } = useContext(AppContext);
 
@@ -27,7 +29,7 @@ const ConfirmPin = ({ navigation, route }) => {
     if (confirmPin.length === pinLength && confirmPin === pin) {
       return true;
     } else {
-      setError('Pins do not match');
+      setError(t('PinsDoNotMatch'));
       return false;
     }
   };
@@ -78,8 +80,8 @@ const ConfirmPin = ({ navigation, route }) => {
         </View>
       </View>
       <View style={style.container}>
-        <Text style={style.title}>Repeat your Pin code</Text>
-        <Text style={style.childText}>enter the same 5 digit code:</Text>
+        <Text style={style.title}>{t('RepeatPin')}</Text>
+        <Text style={style.childText}>{t('enterTheSame5')}</Text>
         <View style={style.pinContainer}>
           {Array(pinLength)
             .fill('')
@@ -118,7 +120,7 @@ const ConfirmPin = ({ navigation, route }) => {
           )}
         />
         <TouchableOpacity style={style.button} onPress={handleSubmit}>
-          <Text style={style.signIn}>Continue</Text>
+          <Text style={style.signIn}>{t('Continue')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

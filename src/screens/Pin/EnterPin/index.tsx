@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import {
-  FlatList, Image,
+  FlatList,
+  Image,
   SafeAreaView,
   Text,
   TouchableOpacity,
@@ -9,6 +10,7 @@ import {
 import { styles } from './style';
 import DeleteIcon from '../../../assets/icon/Union.svg';
 import AppContext from '../../auth/AuthContext.tsx';
+import { useTranslation } from 'react-i18next';
 
 const ConfirmPin = ({ navigation }) => {
   const { state } = useContext(AppContext);
@@ -16,6 +18,7 @@ const ConfirmPin = ({ navigation }) => {
   const [confirmPin, setConfirmPin] = useState<string>('');
   const [error, setError] = useState<string>('');
   const style = styles();
+  const { t } = useTranslation();
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
   const pinLength = 5;
 
@@ -23,7 +26,7 @@ const ConfirmPin = ({ navigation }) => {
     if (confirmPin.length === pinLength && confirmPin === state.pinCode) {
       return true;
     } else {
-      setError('Pins do not match');
+      setError(t('PinsDoNotMatch'));
       return false;
     }
   };
@@ -52,14 +55,14 @@ const ConfirmPin = ({ navigation }) => {
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.header}>
-          <Image source={{ uri: state.image }} style={style.icon} />
+        <Image source={{ uri: state.image }} style={style.icon} />
       </View>
       <View style={style.container}>
         <Text style={style.title}>{`${state.name} ${state.lastName}`}</Text>
         <TouchableOpacity onPress={handleChangeAccount}>
-          <Text style={style.title}>Change Account</Text>
+          <Text style={style.title}>{t('ChangeAccount')}</Text>
         </TouchableOpacity>
-        <Text style={style.childText}>enter 5 digit code:</Text>
+        <Text style={style.childText}>{t('enter5')}</Text>
         <View style={style.pinContainer}>
           {Array(pinLength)
             .fill('')
@@ -98,7 +101,7 @@ const ConfirmPin = ({ navigation }) => {
           )}
         />
         <TouchableOpacity style={style.button} onPress={handleSubmit}>
-          <Text style={style.signIn}>Continue</Text>
+          <Text style={style.signIn}>{t('Continue')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

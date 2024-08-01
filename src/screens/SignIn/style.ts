@@ -39,11 +39,6 @@ export const styles = () =>
       width: 25,
       height: 25,
     },
-    // title: {
-    //   fontSize: 18,
-    //   fontWeight: 'bold',
-    //   marginBottom: 20,
-    // },
     textInput: {
       borderWidth: 1,
       borderColor: '#ccc',
@@ -56,20 +51,22 @@ export const styles = () =>
       borderColor: '#ccc',
       borderRadius: 16,
       padding: 15,
-      marginTop: 10,
       flex: 1,
     },
     passwordContainer: {
       flexDirection: 'row',
       alignItems: 'center',
+        marginTop: 10,
     },
     eyeIcon: {
-      marginTop: 10,
-      marginLeft: -40,
+      right: 10,
+      height: '100%',
+        justifyContent:'center',
+      position: 'absolute',
     },
     errorText: {
       color: 'red',
-      marginTop: 5,
+      marginTop: 10,
     },
     button: {
       backgroundColor: '#FA8A34',

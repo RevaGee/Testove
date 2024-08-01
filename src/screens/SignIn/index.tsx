@@ -12,6 +12,7 @@ import CustomHeader from '../Header';
 import { Apilogin } from '../../services/api/auth';
 import AppContext from '../auth/AuthContext.tsx';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useTranslation } from 'react-i18next';
 
 const SignIn = ({ navigation }) => {
   const { state, dispatch } = useContext(AppContext);
@@ -20,6 +21,7 @@ const SignIn = ({ navigation }) => {
   const [password, setPassword] = useState<string>(state.password);
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ email: '', password: '' });
+  const { t } = useTranslation();
   const style = styles();
 
   useEffect(() => {
@@ -83,8 +85,8 @@ const SignIn = ({ navigation }) => {
             />
           </View>
           <View style={style.textContainer}>
-            <Text>Login</Text>
-            <Text style={style.childText}>Personal Account</Text>
+            <Text>{t('Login')}</Text>
+            <Text style={style.childText}>{t('PersonalAccount')}</Text>
           </View>
         </View>
         <View style={style.textInputContainer}>
@@ -92,46 +94,47 @@ const SignIn = ({ navigation }) => {
             <Text style={style.errorText}>{errors.email}</Text>
           ) : null}
           <View style={style.space}>
-            <Text style={style.textStyle}>E-mail</Text>
+            <Text style={style.textStyle}>{t('E-mail')}</Text>
             <TextInput
               value={email}
               onChangeText={setEmail}
-              placeholder="Enter your email"
+              placeholder={t('EnterYourEmail')}
               returnKeyType="done"
               keyboardType="default"
               style={style.textInput}
             />
           </View>
           <View style={style.space}>
-            <Text style={style.textStyle}>Password</Text>
+            <Text style={style.textStyle}>{t('EnterYourPassword')}</Text>
             <View style={style.passwordContainer}>
               <TextInput
                 value={password}
                 onChangeText={setPassword}
-                placeholder="Enter your password"
+                placeholder={t('EnterYourPassword')}
                 secureTextEntry={!showPassword}
                 returnKeyType="done"
                 keyboardType="default"
                 style={style.passwordTextIput}
               />
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+              <TouchableOpacity
+                onPress={() => setShowPassword(!showPassword)}
+                style={style.eyeIcon}>
                 <Image
                   source={
                     showPassword
                       ? require('../../assets/passwordHideIcon.png')
                       : require('../../assets/passwordHideIcon.png')
                   }
-                  style={style.eyeIcon}
                 />
               </TouchableOpacity>
             </View>
           </View>
           <View style={style.buttonsContainer}>
             <TouchableOpacity style={style.button} onPress={handleLogin}>
-              <Text style={style.signUp}>Continue</Text>
+              <Text style={style.signUp}>{t('Continue')}</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={signUpHandler}>
-              <Text style={[style.signIn, style.space]}>Create Account</Text>
+              <Text style={[style.signIn, style.space]}>{t('CreateAccount')}</Text>
             </TouchableOpacity>
           </View>
         </View>

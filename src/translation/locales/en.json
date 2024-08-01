@@ -29,6 +29,17 @@
   "PersonalAccount": "Personal Account",
   "NameError": "Name is required",
   "emailError": "Invalid email address",
-  "PassError": "'Password must be 8-64 characters long, include uppercase, lowercase, numbers, and special characters'"
+  "PassError": "Password must be 8-64 characters long, include uppercase, lowercase, numbers, and special characters",
+  "CreateAccount": "Create Account",
+  "EnterYourEmail": "Enter your email",
+  "EnterYourName": "Enter your name",
+  "Login": "Login",
+  "CreatePinCode": "Create a Pin code",
+  "enter5": "enter 5 digit code:",
+  "mustBe5": "PIN must be 5 digits",
+  "PinsDoNotMatch": "Pins do not match",
+  "RepeatPin": "Repeat your Pin code",
+  "ChangeAccount": "Change Account",
+  "enterTheSame5": "enter the same 5 digit code:"
 }
 

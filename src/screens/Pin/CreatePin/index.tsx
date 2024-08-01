@@ -10,10 +10,12 @@ import { styles } from './style.ts';
 import DeleteIcon from '../../../assets/icon/Union.svg';
 import Mobile from '../../../assets/icon/mobile.svg';
 import Arrow from '../../../assets/icon/Vector.svg';
+import { useTranslation } from 'react-i18next';
 
 const CreatePin = ({ navigation }) => {
   const [pin, setPin] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const { t } = useTranslation();
   const style = styles();
   const keyboard = [1, 2, 3, 4, 5, 6, 7, 8, 9, '', 0, 'del'];
   const pinLength = 5;
@@ -22,7 +24,7 @@ const CreatePin = ({ navigation }) => {
     if (pin.length === pinLength && /^[0-9]+$/.test(pin)) {
       return true;
     } else {
-      setError('PIN must be 4 digits');
+      setError(t('mustBe5'));
       return false;
     }
   };
@@ -54,8 +56,8 @@ const CreatePin = ({ navigation }) => {
         </View>
       </View>
       <View style={style.container}>
-        <Text style={style.title}>Create a Pin code</Text>
-        <Text style={style.childText}>enter 5 digit code:</Text>
+        <Text style={style.title}>{t('CreatePinCode')}</Text>
+        <Text style={style.childText}>{t('enter5')}</Text>
         <View style={style.pinContainer}>
           {Array(pinLength)
             .fill('')
@@ -69,6 +71,7 @@ const CreatePin = ({ navigation }) => {
               />
             ))}
         </View>
+        {error ? <Text style={style.errorText}>{error}</Text> : null}
         <FlatList
           data={keyboard}
           scrollEnabled={false}
@@ -81,7 +84,7 @@ const CreatePin = ({ navigation }) => {
               disabled={item === ''}>
               <View style={style.flat}>
                 {item === 'del' ? (
-                  <DeleteIcon/>
+                  <DeleteIcon />
                 ) : (
                   <Text style={style.flatText}>{item}</Text>
                 )}
@@ -90,7 +93,7 @@ const CreatePin = ({ navigation }) => {
           )}
         />
         <TouchableOpacity style={style.button} onPress={handleSubmit}>
-          <Text style={style.signIn}>Continue</Text>
+          <Text style={style.signIn}>{t('Continue')}</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
