@@ -1,4 +1,3 @@
-// src/routes/RootFull.tsx
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import {
@@ -14,6 +13,7 @@ import SignIn from '../screens/SignIn';
 import CreatePin from '../screens/Pin/CreatePin';
 import ConfirmPin from '../screens/Pin/ConfirmPin';
 import Dashboard from '../screens/Dashboard';
+import Posts from '../screens/Post';
 import Portfolio from '../screens/Portfolio';
 import Search from '../screens/Search';
 import Profile from '../screens/Profile';
@@ -29,7 +29,6 @@ import EnterPin from '../screens/Pin/EnterPin';
 const AuthStack = createStackNavigator();
 const MainTabs = createBottomTabNavigator();
 const RootStack = createStackNavigator();
-const PinStack = createStackNavigator();
 
 function AuthStackNavigator() {
   return (
@@ -120,6 +119,7 @@ function Navigation() {
         )}
 
         <RootStack.Screen name="Language" component={Language} />
+        <RootStack.Screen name="Post" component={Posts} />
       </RootStack.Navigator>
     </NavigationContainer>
   );

@@ -3,12 +3,13 @@ import { FlatList, SafeAreaView, Text, TextInput, View } from 'react-native';
 import { posts } from '../../services/api/post.ts';
 import { Post } from '../../types/types.ts';
 import { styles } from './style.ts';
+import {useTranslation} from "react-i18next";
 
 const Search = () => {
   const [search, setSearch] = useState('');
   const [postData, setPostData] = useState<Post[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
-
+const {t} = useTranslation()
   const style = styles();
 
   useEffect(() => {
@@ -52,20 +53,20 @@ const Search = () => {
 
   const renderItem = ({ item }: { item: Post }) => (
     <View style={style.postContainer}>
-      <Text style={style.flatText}>ID: {item.id}</Text>
-      <Text style={style.childPostText}>Name: {item.title}</Text>
+      <Text style={style.flatText}>{t('ID')}: {item.id}</Text>
+      <Text style={style.childPostText}>{t('Name')}: {item.title}</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={style.safeArea}>
       <View style={style.container}>
-        <Text style={style.headerText}>Search</Text>
+        <Text style={style.headerText}>{t('Search')}</Text>
         <View style={style.passwordContainer}>
           <TextInput
             value={search}
             onChangeText={setSearch}
-            placeholder="Search Products.."
+            placeholder={t('SearchProducts')}
             returnKeyType="done"
             keyboardType="default"
             style={style.passwordTextIput}

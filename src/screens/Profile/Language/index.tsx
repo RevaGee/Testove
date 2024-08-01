@@ -1,14 +1,17 @@
 import React from 'react';
 import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { styles } from './style.ts';
 import Arrow from '../../../assets/icon/Vector.svg';
 
+
 const Language = ({ navigation }) => {
+  const { t, i18n } = useTranslation();
   const style = styles();
-  const handler = () => {
-    navigation.navigate('Profile', {
-      screen: 'Language',
-    });
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+    navigation.goBack();
   };
 
   return (
@@ -21,14 +24,14 @@ const Language = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={style.container}>
-        <Text style={style.settings}>Settings</Text>
+        <Text style={style.settings}>{t('Settings')}</Text>
         <View style={style.textInputContainer}>
           <View style={style.inputContainer}>
-            <TouchableOpacity onPress={handler}>
-              <Text style={style.childContainer}>English</Text>
+            <TouchableOpacity onPress={() => changeLanguage('en')}>
+              <Text style={style.childContainer}>{t('English')}</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={style.childContainer}>Arabic</Text>
+            <TouchableOpacity onPress={() => changeLanguage('ar')}>
+              <Text style={style.childContainer}>{t('Arabic')}</Text>
             </TouchableOpacity>
           </View>
         </View>

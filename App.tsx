@@ -1,18 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 
 import Navigation from './src/routes/RootFull.tsx';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppProvider } from './src/screens/auth/AuthContext.tsx';
-import SplashScreen from 'react-native-splash-screen';
-
+import './src/translation/i18n.ts';
 function App(): React.JSX.Element {
 
   return (
