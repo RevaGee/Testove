@@ -3,13 +3,15 @@ import { SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { styles } from './style.ts';
 import Arrow from '../../../assets/icon/Vector.svg';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const Language = ({ navigation }) => {
   const { t, i18n } = useTranslation();
   const style = styles();
 
-  const changeLanguage = (lng: string) => {
+  const changeLanguage = async (lng: string) => {
+    await AsyncStorage.setItem('language', lng);
     i18n.changeLanguage(lng);
     navigation.goBack();
   };

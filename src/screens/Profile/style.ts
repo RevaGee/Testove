@@ -42,6 +42,9 @@ export const styles = () =>
       alignItems: 'center',
       flexDirection: 'row',
     },
+      svg:{
+          marginRight:10
+      },
     space: {
       justifyContent: 'space-between',
       alignItems: 'center',

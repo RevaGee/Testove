@@ -6,14 +6,16 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import Lending from "../../assets/icon/lendingIcon.svg"
-import RealEstate from "../../assets/icon/realEstate.svg"
-import ETFs from "../../assets/icon/etfs.svg"
-import Commodities from "../../assets/icon/commodities.svg"
-import Crypto from "../../assets/icon/crypto.svg"
+import Lending from '../../assets/icon/lendingIcon.svg';
+import RealEstate from '../../assets/icon/realEstate.svg';
+import ETFs from '../../assets/icon/etfs.svg';
+import Commodities from '../../assets/icon/commodities.svg';
+import Crypto from '../../assets/icon/crypto.svg';
 import { styles } from './style.ts';
+import { useTranslation } from 'react-i18next';
 
 const Welcome = ({ navigation }) => {
+  const { t } = useTranslation();
   const style = styles();
   const signUpHandler = () => {
     navigation.navigate('SignUp');
@@ -27,37 +29,36 @@ const Welcome = ({ navigation }) => {
         <View style={style.input3}>
           <View>
             <Image
-                style={style.input}
-                source={require('../../assets/iconx64.png')}
+              style={style.input}
+              source={require('../../assets/iconx64.png')}
             />
             <View style={style.input}>
-              <RealEstate/>
+              <RealEstate />
             </View>
             <View style={style.input}>
-              <ETFs/>
+              <ETFs />
             </View>
           </View>
           <View style={style.input2}>
             <View style={style.input}>
-              <Lending/>
+              <Lending />
             </View>
             <View style={style.input}>
-              <Commodities/>
+              <Commodities />
             </View>
             <View style={style.input}>
-              <Crypto/>
+              <Crypto />
             </View>
-
           </View>
         </View>
         <View style={style.buttonsContainer}>
           <TouchableOpacity onPress={signInHandler}>
-            <Text style={style.signIn}>Sign In</Text>
+            <Text style={style.signIn}>{t('SignIn')}</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={signUpHandler}
             style={[style.button, style.buttonSpacing]}>
-            <Text style={style.signUp}>Sign Up</Text>
+            <Text style={style.signUp}>{t('SignUp')}</Text>
           </TouchableOpacity>
         </View>
       </View>

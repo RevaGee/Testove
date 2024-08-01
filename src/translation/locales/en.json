@@ -13,6 +13,22 @@
   "ID": "ID",
   "Name": "Name",
   "Search": "Search",
-  "SearchProducts": "Search Products.."
+  "SearchProducts": "Search Products..",
+  "About": "About",
+  "Comments": "Comments",
+  "Language": "Language",
+  "Basic": "Basic",
+  "Other": "Other",
+  "LogOut": "Log Out",
+  "SignIn": "Sign In",
+  "SignUp": "Sign Up",
+  "Password": "Password",
+  "E-mail": "E-mail",
+  "Continue": "Continue",
+  "EnterYourPassword": "Enter your password",
+  "PersonalAccount": "Personal Account",
+  "NameError": "Name is required",
+  "emailError": "Invalid email address",
+  "PassError": "'Password must be 8-64 characters long, include uppercase, lowercase, numbers, and special characters'"
 }
 

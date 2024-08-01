@@ -9,129 +9,125 @@ import {
 } from 'react-native';
 import { styles } from './style.ts';
 import CustomHeader from '../Header';
+import { useTranslation } from 'react-i18next';
 
-const SignUp = ({ navigation }) => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({ name: '', email: '', password: '' });
+  const { t } = useTranslation();
   const style = styles();
-  const validate = () => {
-    let valid = true;
-    const newErrors = { name: '', email: '', password: '' };
 
-    // Name validation
+  const validate = (name: string, email: string, password: string) => {
+    const errors: { name: string; email: string; password: string } = { name: '', email: '', password: '' };
+
     if (!name.trim()) {
-      newErrors.name = 'Name is required';
-      valid = false;
+      errors.name = t('NameError');
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      newErrors.email = 'Invalid email address';
-      valid = false;
+    if (!email || !emailRegex.test(email)) {
+      errors.email = t('emailError');
     }
 
-    // Password validation
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
-    if (!passwordRegex.test(password)) {
-      newErrors.password =
-        'Password must be 8-64 characters, including uppercase, lowercase letters, and special characters';
-      valid = false;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$/;
+    if (!password || !passwordRegex.test(password)) {
+      errors.password = t('PassError');
     }
 
-    setErrors(newErrors);
-    return valid;
+    return errors;
   };
 
-  const handler = () => {
-    navigation.navigate('Main');
+  const handleSubmit = () => {
+    const validationErrors = validate(name, email, password);
+    if (Object.values(validationErrors).some(error => error !== '')) {
+      setErrors(validationErrors);
+    } else {
+      console.log('Form is valid!');
+    }
   };
 
   return (
-    <SafeAreaView style={style.safeArea}>
-      <CustomHeader />
-      <View style={style.container}>
-        <View style={style.childContainer}>
-          <View style={style.icon}>
-            <Image
-              source={require('../../assets/addIcon.png')}
-              style={style.iconStyle}
-            />
-          </View>
-          <View style={style.textContainer}>
-            <Text>Sign Up</Text>
-            <Text style={style.childText}>Personal Account</Text>
-          </View>
-        </View>
-        <View style={style.textInputContainer}>
-          <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Name</Text>
-            <TextInput
-              value={name}
-              onChangeText={setName}
-              placeholder="Enter your name"
-              returnKeyType="done"
-              keyboardType="default"
-              style={style.textInput}
-            />
-            {errors.name ? (
-              <Text style={style.errorText}>{errors.name}</Text>
-            ) : null}
-          </View>
-
-          <View style={style.inputContainer}>
-            <Text style={style.textStyle}>E-mail</Text>
-            <TextInput
-              value={email}
-              onChangeText={setEmail}
-              placeholder="Enter your email"
-              returnKeyType="done"
-              keyboardType="default"
-              style={style.textInput}
-            />
-            {errors.email ? (
-              <Text style={style.errorText}>{errors.email}</Text>
-            ) : null}
-          </View>
-          <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Password</Text>
-            <View style={style.passwordContainer}>
-              <TextInput
-                value={password}
-                onChangeText={setPassword}
-                placeholder="Enter your password"
-                secureTextEntry={!showPassword}
-                returnKeyType="done"
-                keyboardType="default"
-                style={style.passwordTextIput}
+      <SafeAreaView style={style.safeArea}>
+        <CustomHeader />
+        <View style={style.container}>
+          <View style={style.childContainer}>
+            <View style={style.icon}>
+              <Image
+                  source={require('../../assets/addIcon.png')}
+                  style={style.iconStyle}
               />
-              <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-                <Image
-                  source={
-                    showPassword
-                      ? require('../../assets/passwordSingUpIcon.png')
-                      : require('../../assets/passwordSingUpIcon.png')
-                  }
-                  style={style.eyeIcon}
-                />
-              </TouchableOpacity>
             </View>
-            {errors.password ? (
-              <Text style={style.errorText}>{errors.password}</Text>
-            ) : null}
+            <View style={style.textContainer}>
+              <Text>{t('SignUp')}</Text>
+              <Text style={style.childText}>{t('PersonalAccount')}</Text>
+            </View>
           </View>
-          <View style={style.buttonsContainer}>
-            <TouchableOpacity style={style.button} onPress={handler}>
-              <Text style={style.signUp}>Continue</Text>
-            </TouchableOpacity>
+          <View style={style.textInputContainer}>
+            <View style={style.inputContainer}>
+              <Text style={style.textStyle}>{t('Name')}</Text>
+              <TextInput
+                  value={name}
+                  onChangeText={setName}
+                  placeholder="Enter your name"
+                  returnKeyType="done"
+                  keyboardType="default"
+                  style={style.textInput}
+              />
+              {errors.name ? (
+                  <Text style={style.errorText}>{errors.name}</Text>
+              ) : <View style={style.errorText}/>}
+            </View>
+
+            <View style={style.inputContainer}>
+              <Text style={style.textStyle}>{t('E-mail')}</Text>
+              <TextInput
+                  value={email}
+                  onChangeText={setEmail}
+                  placeholder="Enter your email"
+                  returnKeyType="done"
+                  keyboardType="default"
+                  style={style.textInput}
+              />
+              {errors.email ? (
+                  <Text style={style.errorText}>{errors.email}</Text>
+              ) : <View style={style.errorText}/>}
+            </View>
+            <View style={style.inputContainer}>
+              <Text style={style.textStyle}>{t('Password')}</Text>
+              <View style={style.passwordContainer}>
+                <TextInput
+                    value={password}
+                    onChangeText={setPassword}
+                    placeholder={t('EnterYourPassword')}
+                    secureTextEntry={!showPassword}
+                    returnKeyType="done"
+                    keyboardType="default"
+                    style={style.passwordTextIput}
+                />
+                <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                  <Image
+                      source={
+                        showPassword
+                            ? require('../../assets/passwordSingUpIcon.png')
+                            : require('../../assets/passwordSingUpIcon.png')
+                      }
+                      style={style.eyeIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              {errors.password ? (
+                  <Text style={style.errorText}>{errors.password}</Text>
+              ) : <View style={style.errorText}/>}
+            </View>
           </View>
+          <TouchableOpacity style={style.button} onPress={handleSubmit}>
+            <Text style={style.signUp}>{t('Continue')}</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
   );
 };
 

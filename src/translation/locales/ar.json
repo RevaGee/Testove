@@ -13,5 +13,18 @@
   "ID": "الرقم التعريفي",
   "Name": "الاسم",
   "Search": "بحث",
-  "SearchProducts": "بحث عن المنتجات.."
+  "SearchProducts": "بحث عن المنتجات..",
+  "About": "حول",
+  "Comments": "تعليقات",
+  "Language": "اللغة",
+  "Basic": "أساسي",
+  "Other": "أخرى",
+  "LogOut": "تسجيل الخروج",
+  "SignIn": "تسجيل الدخول",
+  "SignUp": "إنشاء حساب",
+  "Password": "كلمة المرور",
+  "E-mail": "البريد الإلكتروني",
+  "Continue": "متابعة",
+  "EnterYourPassword": "أدخل كلمة المرور الخاصة بك",
+  "PersonalAccount": "الحساب الشخصي"
 }

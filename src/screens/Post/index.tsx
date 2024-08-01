@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { styles } from './style.ts';
 import { comments, posts } from '../../services/api/post.ts';
-import {CombinedItem, Comment, Post} from '../../types/types.ts';
+import { CombinedItem, Comment, Post } from '../../types/types.ts';
 import PostImage from '../../assets/icon/postImage.svg';
 import Arrow from '../../assets/icon/Vector.svg';
+import { useTranslation } from 'react-i18next';
 
 const Posts = ({ navigation }) => {
   const [combinedData, setCombinedData] = useState<CombinedItem[]>([]);
+  const { t } = useTranslation();
   const style = styles();
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const Posts = ({ navigation }) => {
       return (
         <>
           <View style={style.flatContainer}>
-            <Text style={style.textPost}>About</Text>
+            <Text style={style.textPost}>{t('About')}</Text>
           </View>
           <View style={style.postContainer}>
             <Text style={style.headerText}>{post.title}</Text>
@@ -64,7 +66,7 @@ const Posts = ({ navigation }) => {
         <>
           {showCommentsHeader && (
             <View style={style.flatContainer}>
-              <Text style={style.textPost}>Comments</Text>
+              <Text style={style.textPost}>{t('Comments')}</Text>
             </View>
           )}
           <View style={style.postContainer}>
@@ -86,7 +88,7 @@ const Posts = ({ navigation }) => {
           <Arrow />
         </TouchableOpacity>
         <View style={style.container}>
-          <Text style={style.title}>Post name</Text>
+          <Text style={style.title}>{t('PostName')}</Text>
           <PostImage style={style.image} />
         </View>
       </View>

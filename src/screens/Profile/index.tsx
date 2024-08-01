@@ -12,10 +12,12 @@ import AppContext from '../auth/AuthContext.tsx';
 import Globe from '../../assets/icon/Globe.svg';
 import ArrowRight from '../../assets/icon/arrow-right.svg';
 import Logout from '../../assets/icon/logout.svg';
+import { useTranslation } from 'react-i18next';
 
 const Profile = ({ navigation }) => {
   const { dispatch } = useContext(AppContext);
   const { state } = useContext(AppContext);
+  const { t } = useTranslation();
   const style = styles();
 
   const handler = () => {
@@ -36,7 +38,7 @@ const Profile = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={style.container}>
-        <Text style={style.settings}>Settings</Text>
+        <Text style={style.settings}>{t('Settings')}</Text>
         <View style={style.textInputContainer}>
           <View style={style.headerContainer}>
             <Image source={{ uri: state.image }} style={style.image} />
@@ -46,21 +48,21 @@ const Profile = ({ navigation }) => {
               }>{`${state.name} ${state.lastName}`}</Text>
           </View>
           <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Basic</Text>
+            <Text style={style.textStyle}>{t('Basic')}</Text>
             <TouchableOpacity onPress={handler} style={style.space}>
               <View style={style.childContainer}>
-                <Globe />
-                <Text> Language </Text>
+                <Globe style={style.svg} />
+                <Text>{t('Language')}</Text>
               </View>
               <ArrowRight />
             </TouchableOpacity>
           </View>
           <View style={style.inputContainer}>
-            <Text style={style.textStyle}>Other</Text>
+            <Text style={style.textStyle}>{t('Other')}</Text>
             <TouchableOpacity onPress={handleLogout} style={style.space}>
               <View style={style.childContainer}>
-                <Logout />
-                <Text> Log Out </Text>
+                <Logout style={style.svg} />
+                <Text>{t('LogOut')}</Text>
               </View>
               <ArrowRight />
             </TouchableOpacity>

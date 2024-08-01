@@ -7,9 +7,10 @@ export const styles = () =>
       backgroundColor: '#F2F3F5',
     },
     container: {
-      height: '100%',
       backgroundColor: '#fff',
       borderRadius: 27,
+      height: '100%',
+      position: 'relative',
     },
     childContainer: {
       alignItems: 'center',
@@ -20,6 +21,7 @@ export const styles = () =>
     },
     textInputContainer: {
       paddingHorizontal: 16,
+      // height:'70%'
     },
     childText: {
       fontWeight: 400,
@@ -39,11 +41,6 @@ export const styles = () =>
       width: 25,
       height: 25,
     },
-    // title: {
-    //   fontSize: 18,
-    //   fontWeight: 'bold',
-    //   marginBottom: 20,
-    // },
     inputContainer: {
       marginTop: 20,
     },
@@ -79,8 +76,10 @@ export const styles = () =>
       paddingVertical: 15,
       paddingHorizontal: 30,
       borderRadius: 16,
-      width: '95%',
+      width: '90%',
       alignSelf: 'center',
+      bottom: '20%',
+      position: 'absolute',
     },
     signUp: {
       color: '#fff',
